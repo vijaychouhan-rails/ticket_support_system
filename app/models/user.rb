@@ -9,8 +9,9 @@ class User < ApplicationRecord
   # Associatons goes here
   has_many :tickets, dependent: :destroy
   has_many :processed_tickets, foreign_key: 'processor_id', dependent: :nullify
+  has_many :comments, dependent: :destroy
 
-  # To validate name should be present
+  # Validation goes here
   validates_presence_of :name, :user_type
 
   # Set the default user type

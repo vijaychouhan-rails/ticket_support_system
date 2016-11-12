@@ -3,6 +3,7 @@ class Ticket < ApplicationRecord
   # Associatons goes here
   belongs_to :user
   belongs_to :processor, class_name: "User", optional: true
+  has_many :comments
 
   # Validation goes here
   validates_presence_of :user_id, :subject, :message, :status
