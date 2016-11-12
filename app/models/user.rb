@@ -7,6 +7,9 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   # To validate name should be present
-  validates_presence_of :name
+  validates_presence_of :name, :user_type
+
+  # Define role of user
+  enum user_type: { customer: 'Customer', agent: 'Agent' }
 
 end
