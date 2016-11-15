@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   # Associatons goes here
   has_many :tickets, dependent: :destroy
-  has_many :processed_tickets, foreign_key: 'processor_id', dependent: :nullify
+  has_many :processed_tickets, class_name: 'Ticket', foreign_key: 'processor_id', dependent: :nullify
   has_many :comments, dependent: :destroy
 
   # Validation goes here
@@ -24,6 +24,6 @@ class User < ApplicationRecord
 
   private
     def defult_user_type
-      self.user_type = 'customer'
+      self.user_type ||= 'customer'
     end
 end
