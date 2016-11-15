@@ -15,9 +15,9 @@ class Admin::UsersController < Admin::ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.json { render partial: 'user', locals: { user: @user }, status: :created, location: [:admin, @user] }
+        format.json { render json: { result: true, status: 'created successfully' } }
       else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @user.errors.full_messages, result: false, status: 'errors occurs' } }
       end
     end
   end
@@ -25,9 +25,9 @@ class Admin::UsersController < Admin::ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.json { render partial: 'user', locals: { user: @user }, status: :ok, location: [:admin, @user] }
+        format.json { render json: { result: true, status: 'updated successfully' } }
       else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @user.errors.full_messages, result: false, status: 'errors occurs' } }
       end
     end
   end
