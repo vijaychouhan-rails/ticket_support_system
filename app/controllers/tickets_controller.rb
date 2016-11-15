@@ -14,9 +14,9 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-        format.json { render :show, status: :created, location: @ticket }
+        format.json { render json: { result: true, status: 'created successfully' } }
       else
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        format.json { render json: { errors: @ticket.errors.full_messages, result: false, status: 'errors occurs' } }
       end
     end
   end
@@ -29,6 +29,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:subject, :message, :user_id, :status)
+      params.require(:ticket).permit(:subject, :message)
     end
 end

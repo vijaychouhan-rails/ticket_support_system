@@ -22,6 +22,6 @@ class ApplicationController < ActionController::Base
 
   private
     def not_found
-      render json: { status: 'fail', message: 'The page you are looking for does not exist' } and return
+      render json: { result: false, errors: ['The page you are looking for does not exist'] } and return
     end
 end
