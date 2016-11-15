@@ -20,6 +20,9 @@ gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise_token_auth'
 
+# To enable cross origin request
+gem 'rack-cors', :require => 'rack/cors'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
