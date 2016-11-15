@@ -13,6 +13,8 @@ class Ticket < ApplicationRecord
 
   enum status: { open: 'Open', work_in_progess: 'Work_in_progess', close: 'Close' }
 
+  scope :unprocessed_tickets, -> { where("processor_id IS NULL") }
+
   private
     def defult_status
       self.status = 'open'

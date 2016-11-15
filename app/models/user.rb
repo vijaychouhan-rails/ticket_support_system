@@ -15,11 +15,12 @@ class User < ApplicationRecord
   validates_presence_of :name, :user_type
 
   # Set the default user type
-  after_initialize :defult_user_type
+  after_initialize :defult_user_type, :if => :new_record?
 
   # Define role of user
-  enum user_type: { customer: 'Customer', agent: 'Agent' }
+  enum user_type: { customer: 'Customer', agent: 'Agent', admin: 'Admin' }
 
+  scope :not_admin_users, -> { where.not(user_type: :admin) }
 
   private
     def defult_user_type

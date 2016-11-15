@@ -1,9 +1,9 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ticket, only: [:show, :update]
+  before_action :set_ticket, only: [:show]
 
   def index
-    @tickets = Ticket.all
+    @tickets = current_user.tickets
   end
 
   def show
@@ -15,16 +15,6 @@ class TicketsController < ApplicationController
     respond_to do |format|
       if @ticket.save
         format.json { render :show, status: :created, location: @ticket }
-      else
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @ticket.update(ticket_params)
-        format.json { render :show, status: :ok, location: @ticket }
       else
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
