@@ -9,14 +9,14 @@ class Ticket < ApplicationRecord
   validates_presence_of :user_id, :subject, :message, :status
 
   # Set the default status of a ticket
-  after_initialize :defult_status
+  after_initialize :defult_status, :if => :new_record?
 
-  enum status: { open: 'Open', work_in_progess: 'Work_in_progess', close: 'Close' }
+  enum status: { open: 'Open', work_in_progress: 'Work_in_progress', close: 'Close' }
 
   scope :unprocessed_tickets, -> { where("processor_id IS NULL") }
 
   private
     def defult_status
-      self.status = 'open'
+      self.status ||= 'open'
     end
 end
