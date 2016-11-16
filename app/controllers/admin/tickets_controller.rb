@@ -10,7 +10,7 @@ class Admin::TicketsController < Admin::ApplicationController
   end
 
   def create
-    @ticket = Tickets.new(ticket_params)
+    @ticket = Ticket.new(ticket_params)
 
     respond_to do |format|
       if @ticket.save
